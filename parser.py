@@ -63,11 +63,13 @@ if __name__ == '__main__':
 
             news_title = item.select_one('.news-line-item h4').text.strip()
             news_description = ''.join(map(lambda t: t.text, tuple(item.select('.news-line-item > :not(h4)'))))
+            url = item.select_one('.news-line-item a').attrs['href'].split('?')[0]
 
             news_items.append({
                 'date': news_date.isoformat(),
                 'title': news_title,
-                'description': news_description
+                'description': news_description,
+                'url': url,
             })
 
     task_time = round(time.time() - start_timestamp, 2)
